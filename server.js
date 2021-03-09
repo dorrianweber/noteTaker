@@ -1,3 +1,4 @@
+// DEPENDENCIES
 const express = require('express');
 
 // EXPRESS CONFIGURATION
@@ -10,13 +11,16 @@ const PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// // HTML Routes
-// require('./routes/apiRoutes')(app);
+// Sets 'public' as the root folder when coming from front-end
+app.use(express.static('public'));
 
 // API Routes
-// require('./routes/htmlRoutes')(app);
+require('./routes/apiRoutes')(app);
+
+// HTML Routes
+require('./routes/htmlRoutes')(app);
 
 // LISTENER
 app.listen(PORT, () => {
     console.log(`App listening on PORT: ${PORT}`);
-  });  
+  });
